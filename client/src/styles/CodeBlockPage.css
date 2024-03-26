@@ -1,0 +1,56 @@
+.container {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .title {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .code-block {
+    background-color: #282c34;
+    color: #9DA5B4;
+    padding: 20px;
+    border-radius: 4px;
+    overflow-x: auto;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .back-button {
+    padding: 10px 15px; /* Size of the button */
+    font-size: 16px; /* Text size */
+    color: #fff; /* Text color */
+    background-color: #007bff; /* Background color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    text-align: center; /* Center the text */
+    text-decoration: none; /* No underline */
+    display: inline-block; /* Use inline-block for better control */
+  }
+  
+  .back-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+  }
+
+  .role {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 5px 10px;
+    color: #ffffff;
+    background-color: #007bff; /* A nice blue, you can adjust the color based on your preference or design */
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 14px;
+  }
