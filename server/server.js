@@ -30,9 +30,15 @@ io.on('connection', (socket) => {
             codeBlockConnections[id].push(socket.id);
             socket.emit('assignRole', 'student');
         }
-
+        console.log('user joined to code block', id, codeBlockConnections[id]);
         // Join a room specific to the codeBlockId
         socket.join(id);
+    });
+
+    socket.on('updateCode', ({ codeBlockId, updatedCode }) => {
+        // Broadcast the updated code to all users in the room
+        socket.to(codeBlockId).emit('codeUpdated', updatedCode);
+        socket.emit('codeUpdated', updatedCode);
     });
 
     socket.on('disconnect', () => {

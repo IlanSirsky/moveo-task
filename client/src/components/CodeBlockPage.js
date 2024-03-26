@@ -13,52 +13,69 @@ const codeBlocks = [
     { id: 4, title: 'Async/Await Example', code: 'async function fetchData() {\n  const data = await getData();\n  return data;\n}' },
 ];
 
-
 const CodeBlockPage = () => {
     let { id } = useParams();
     const navigate = useNavigate();
-    
+
     const codeBlockId = parseInt(id, 10);
     const codeBlock = codeBlocks.find(block => block.id === codeBlockId);
 
     const [role, setRole] = useState('');
     const [code, setCode] = useState(codeBlock.code);
-    const codeRef = useRef(code);
+    const [editableCode, setEditableCode] = useState(codeBlock.code);
+    const codeRef = useRef(null);
+    const socketRef = useRef(null);
+
 
     useEffect(() => {
-        const socket = io('http://localhost:4000');
 
-        socket.emit('joinCodeBlock', codeBlockId);
+        socketRef.current = io('http://localhost:4000');
 
-        socket.on('assignRole', (assignedRole) => {
+        socketRef.current.emit('joinCodeBlock', codeBlockId);
+
+        socketRef.current.on('assignRole', (assignedRole) => {
             console.log(`You are the ${assignedRole}`);
             setRole(assignedRole); // 'mentor' or 'student'
         });
 
-        // socket.on('codeUpdated', (updatedCode) => {
-        //     setCode(updatedCode);
-        // });
+        socketRef.current.on('loadCode', (initialCode) => {
+            setCode(initialCode);
+            setEditableCode(initialCode);
+        });
 
+        socketRef.current.on('codeUpdated', (updatedCode) => {
+            console.log('Code updated:', updatedCode);
+            setCode(updatedCode);
+        });
+
+        // Clean up on component unmount
         return () => {
-            socket.disconnect();
+            if (socketRef.current) {
+                socketRef.current.disconnect();
+            }
         };
     }, [codeBlockId]);
 
     useEffect(() => {
         if (codeRef.current) {
-          hljs.highlightBlock(codeRef.current);
+            // Update the text content of the codeRef
+            codeRef.current.textContent = code;
+            // Re-highlight the code
+            hljs.highlightBlock(codeRef.current);
         }
-      }, [code]);
-
-    // const handleCodeChange = (event) => {
-    //     const updatedCode = event.currentTarget.innerText;
-    //     setCode(updatedCode);
-    //     // socket.emit('updateCode', { codeBlockId, updatedCode });
-    //     };
+    }, [code]);
 
     if (!codeBlock) {
         return <div>Code block not found</div>;
     }
+
+    const handleEditableCodeChange = (event) => {
+        const changedCode = event.target.value;
+        setEditableCode(changedCode);
+        if (socketRef.current) {
+            socketRef.current.emit('updateCode', { codeBlockId, updatedCode: changedCode });
+        }
+    };
 
     const handleBackToLobby = () => {
         navigate('/');
@@ -70,16 +87,18 @@ const CodeBlockPage = () => {
             <h2 className="title">{codeBlock.title}</h2>
             <div className="role">Your role: {role}</div>
             <div className="code-block">
+                {role === 'student' &&
+                    <div>
+                        <textarea
+                            value={editableCode}
+                            onChange={handleEditableCodeChange}
+                            spellCheck="false"
+                            rows="10"
+                            cols="100"
+                        />
+                    </div>}
                 <pre>
-                    <code
-                        className="language-javascript"
-                        contentEditable={role === 'student'}
-                        ref={codeRef}
-                        
-                        suppressContentEditableWarning={true}
-                    >
-                        {code}
-                    </code>
+                    <code className="language-javascript" spellcheck="false" ref={codeRef}> {code} </code>
                 </pre>
             </div>
         </div>
