@@ -22,7 +22,9 @@ const CodeBlockPage = () => {
     useEffect(() => {
 
         // Connect to the server
-        socketRef.current = io('http://localhost:4000');
+        // socketRef.current = io('http://localhost:4000');
+        socketRef.current = io('moveo-task-server-alpha.vercel.app');
+
         
         // client joined the code block room
         socketRef.current.emit('joinCodeBlock', codeBlockId);

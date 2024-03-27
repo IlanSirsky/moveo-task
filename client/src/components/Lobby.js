@@ -4,7 +4,9 @@ import '../styles/Lobby.css';
 import io from 'socket.io-client';
 
 // Connect to the server
-const socket = io('http://localhost:4000');
+// const socket = io('http://localhost:4000');
+const socket = io('moveo-task-server-alpha.vercel.app');
+
 
 // Lobby component
 const Lobby = () => {
