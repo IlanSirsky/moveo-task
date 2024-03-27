@@ -1,21 +1,25 @@
-import React from 'react';
+import React , { useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Lobby.css';
+import io from 'socket.io-client';
 
-// Mock data for code blocks
-const codeBlocks = [
-  { id: 1, title: 'Async Case' },
-  { id: 2, title: 'Callback Example' },
-  { id: 3, title: 'Promise Example' },
-  { id: 4, title: 'Async/Await Example' },
-];
+const socket = io('http://localhost:4000');
 
 const Lobby = () => {
+  const [titles, setTitles] = useState([]);
+
+  useEffect(() => {
+    socket.emit('getTitles');
+    socket.on('titles', (titles) => {
+      setTitles(titles);
+    });
+  }, []);
+
   return (
     <div>
       <h2>Choose Code Block</h2>
       <ul>
-        {codeBlocks.map(block => (
+        {titles.map(block => (
           <li key={block.id}>
             <Link to={`/code/${block.id}`}>{block.title}</Link>
           </li>
