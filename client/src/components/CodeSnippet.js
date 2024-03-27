@@ -10,12 +10,14 @@ const CodeSnippet = ({ code }) => {
 
   // Highlight the code block
   useEffect(() => {
-    hljs.highlightBlock(codeRef.current);
+    const codeSnip = document.getElementById('codeSnipet');
+    delete codeSnip.dataset.highlighted;
+    hljs.highlightElement(codeRef.current);
   }, [code]);
 
   return (
     <pre>
-      <code spellCheck="false" ref={codeRef} className="javascript">
+      <code id="codeSnipet" spellCheck="false" ref={codeRef} className="javascript">
         {code} 
       </code>
     </pre>
