@@ -26,6 +26,10 @@ mongoose.connect('mongodb+srv://BigData:BigDataProject23@codeblocks.himeihq.mong
     console.error('Error connecting to MongoDB:', error);
 });
 
+app.get('/', (req, res) => {
+    res.json({ message: 'Server is running' });
+});
+
 // Socket.io connection
 io.on('connection', (socket) => {
     socketHandlers(socket, io);
