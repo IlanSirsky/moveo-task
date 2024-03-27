@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import '../styles/Lobby.css';
 import io from 'socket.io-client';
 
+// Connect to the server
 const socket = io('http://localhost:4000');
 
+// Lobby component
 const Lobby = () => {
   const [titles, setTitles] = useState([]);
-
+  
+  // Get code block titles from the server
   useEffect(() => {
     socket.emit('getTitles');
     socket.on('titles', (titles) => {

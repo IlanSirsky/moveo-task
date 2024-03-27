@@ -3,6 +3,7 @@ const http = require('http');
 const mongoose = require('mongoose');
 const socketHandlers = require('./sockets/socketHandlers');
 
+// Create the server
 const app = express();
 const server = http.createServer(app);
 const io = require('socket.io')(server, {
@@ -14,6 +15,7 @@ const io = require('socket.io')(server, {
 
 const PORT = process.env.PORT || 4000;
 
+// Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/codeBlocks', {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -23,8 +25,10 @@ mongoose.connect('mongodb://localhost:27017/codeBlocks', {
     console.error('Error connecting to MongoDB:', error);
 });
 
+// Socket.io connection
 io.on('connection', (socket) => {
     socketHandlers(socket, io);
 });
 
+// Start the server
 server.listen(PORT, () => console.log(`Server listening on port ${PORT}`));

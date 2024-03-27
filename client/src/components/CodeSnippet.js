@@ -4,9 +4,11 @@ import 'highlight.js/styles/night-owl.css';
 import javascript from 'highlight.js/lib/languages/javascript';
 hljs.registerLanguage('javascript', javascript);
 
+// CodeSnippet component
 const CodeSnippet = ({ code }) => {
   const codeRef = useRef();
 
+  // Highlight the code block
   useEffect(() => {
     hljs.highlightBlock(codeRef.current);
   }, [code]);

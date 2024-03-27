@@ -1,5 +1,6 @@
 import React from "react";
 
+// CodeEditor component
 const CodeEditor = ({ value, onChange }) => {
     return (
       <textarea

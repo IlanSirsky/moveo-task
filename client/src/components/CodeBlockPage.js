@@ -21,15 +21,19 @@ const CodeBlockPage = () => {
 
     useEffect(() => {
 
+        // Connect to the server
         socketRef.current = io('http://localhost:4000');
-
+        
+        // client joined the code block room
         socketRef.current.emit('joinCodeBlock', codeBlockId);
 
+        // client receives assigned role
         socketRef.current.on('assignRole', (assignedRole) => {
             console.log(`You are the ${assignedRole}`);
             setRole(assignedRole); // 'mentor' or 'student'
         });
 
+        // client receives code block data
         socketRef.current.on('loadCode', ({ title, code, solution }) => {
             setTitle(title);
             setCode(code);
@@ -37,6 +41,7 @@ const CodeBlockPage = () => {
             setSolution(solution);
         });
 
+        // client receives updated code
         socketRef.current.on('codeUpdated', (updatedCode) => {
             setCode(updatedCode);
         });
@@ -49,20 +54,25 @@ const CodeBlockPage = () => {
         };
     }, [codeBlockId]);
 
+    // Update the code block when the user types in the editor
     const handleEditableCodeChange = (event) => {
         const changedCode = event.target.value;
         
+        // Check if the user's code matches the solution
         if (changedCode === solution) {
             setSolutionEqual(true);
         } else {
             setSolutionEqual(false);
         }
+
+        // Update the code block
         setEditableCode(changedCode);
         if (socketRef.current) {
             socketRef.current.emit('updateCode', { codeBlockId, updatedCode: changedCode });
         }
     };
 
+    // Navigate back to the lobby
     const handleBackToLobby = () => {
         navigate('/');
     };
