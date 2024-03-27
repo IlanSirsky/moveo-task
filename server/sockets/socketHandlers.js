@@ -30,7 +30,7 @@ const handleConnection = (socket, io) => {
 
             const codeBlock = await Block.findOne({ blockId: id });
             if (codeBlock) {
-                socket.emit('loadCode', { title: codeBlock.title, code: codeBlock.code });
+                socket.emit('loadCode', { title: codeBlock.title, code: codeBlock.code, solution: codeBlock.solution});
             } else {
                 console.log('Code block not found');
             }
