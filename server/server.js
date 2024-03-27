@@ -16,7 +16,8 @@ const io = require('socket.io')(server, {
 const PORT = process.env.PORT || 4000;
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/codeBlocks', {
+// mongoose.connect('mongodb://localhost:27017/codeBlocks', {
+mongoose.connect('mongodb+srv://BigData:BigDataProject23@codeblocks.himeihq.mongodb.net/codeBlocks', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
