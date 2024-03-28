@@ -12,6 +12,10 @@ const io = require('socket.io')(server, {
         origin: "*",
         methods: ["GET", "POST"],
         credentials: true
+    },
+    // Allow all session IDs
+    allowRequest: (req, callback) => {
+        callback(null, true);
     }
 });
 
