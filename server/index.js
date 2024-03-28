@@ -1,11 +1,11 @@
 const express = require('express');
-const http = require('http');
+const https = require('https');
 const mongoose = require('mongoose');
 const socketHandlers = require('./sockets/socketHandlers');
 
 // Create the server
 const app = express();
-const server = http.createServer(app);
+const server = https.createServer(app);
 const io = require('socket.io')(server, {
     cors: {
         origin: "*",
