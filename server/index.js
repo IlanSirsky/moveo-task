@@ -7,16 +7,14 @@ const socketHandlers = require('./sockets/socketHandlers');
 const app = express();
 const server = http.createServer(app);
 const io = require('socket.io')(server, {
+    path: '/socket',
+    transports: ['websocket', 'polling'],
+    wssEngine: ['ws', 'wss'],
     cors: {
-        // origin: "http://localhost:3000",
         origin: "*",
         methods: ["GET", "POST"],
-        credentials: true
     },
-    // Allow all session IDs
-    allowRequest: (req, callback) => {
-        callback(null, true);
-    }
+    allowEIO3: true
 });
 
 

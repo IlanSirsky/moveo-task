@@ -23,9 +23,12 @@ const CodeBlockPage = () => {
 
         // Connect to the server
         // socketRef.current = io('http://localhost:4000');
-        socketRef.current = io('https://moveo-task-virid.vercel.app', { 
-            transports: ['websocket'],
-            path: '/socket.io',
+        socketRef.current = io('https://moveo-task-virid.vercel.app', {
+            cert: process.env.NODE_ENV === 'production' ? 'process.env.SSL_CERT' : '', 
+            key: process.env.NODE_ENV === 'production' ? 'process.env.SSL_KEY' : '',
+            path: '/socket',
+            transports: ['websocket', 'polling'],
+            reconnection: true,
             reconnectionAttempts: 3,
         });
 
