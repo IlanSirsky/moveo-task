@@ -69,6 +69,11 @@ const handleConnection = (socket, io) => {
         });
         console.log('User disconnected', socket.id);
     });
+
+    // Handle errors
+    socket.on('error', (error) => {
+        console.error('Socket error:', error);
+    });
 };
 
 module.exports = handleConnection;
