@@ -17,6 +17,7 @@ const Lobby = () => {
   // Get code block titles from the server
   useEffect(() => {
     const returnStatus = socket.emit('getTitles');
+    console.log('Socket info', socket);
     console.log('Fetching code block titles', returnStatus);
     socket.on('titles', (titles) => {
       setTitles(titles);

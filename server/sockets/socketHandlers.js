@@ -5,6 +5,7 @@ const codeBlockConnections = {};
 // Handle socket connections
 const handleConnection = (socket, io) => {
     console.log('A user connected', socket.id);
+    console.log('Socket info', socket);
 
     // Get code block titles from the database and send to lobby
     socket.on('getTitles', async () => {
