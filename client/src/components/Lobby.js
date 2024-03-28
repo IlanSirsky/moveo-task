@@ -8,7 +8,6 @@ import io from 'socket.io-client';
 const socket = io('https://moveo-task-virid.vercel.app', {
   cert: process.env.NODE_ENV === 'production' ? 'process.env.SSL_CERT' : '',
   key: process.env.NODE_ENV === 'production' ? 'process.env.SSL_KEY' : '',
-  path: '/socket',
   transports: ['websocket', 'polling'],
   reconnection: true,
   reconnectionAttempts: 3,

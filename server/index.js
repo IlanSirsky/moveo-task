@@ -7,7 +7,6 @@ const socketHandlers = require('./sockets/socketHandlers');
 const app = express();
 const server = http.createServer(app);
 const io = require('socket.io')(server, {
-    path: '/socket',
     transports: ['websocket', 'polling'],
     wssEngine: ['ws', 'wss'],
     cors: {
