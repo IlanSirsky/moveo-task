@@ -1,7 +1,6 @@
 const express = require('express');
 const http = require('http');
 const mongoose = require('mongoose');
-const cors = require('cors');
 const socketHandlers = require('./sockets/socketHandlers');
 
 // Create the server
@@ -16,11 +15,6 @@ const io = require('socket.io')(server, {
     }
 });
 
-app.use(cors({
-    origin: ["https://moveo-task-client-one.vercel.app"],
-    methods: ["GET", "POST"],
-    credentials: true
-}));
 
 const PORT = process.env.PORT || 4000;
 
