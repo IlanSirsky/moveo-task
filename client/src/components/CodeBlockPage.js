@@ -23,7 +23,7 @@ const CodeBlockPage = () => {
 
         // Connect to the server
         // socketRef.current = io('http://localhost:4000');
-        socketRef.current = io('https://moveo-task-virid.vercel.app', {
+        socketRef.current = io('https://moveo-task-server-ruby.vercel.app/', {
             reconnection: true,
             reconnectionAttempts: 3,
         });

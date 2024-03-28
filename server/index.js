@@ -8,11 +8,10 @@ const app = express();
 const server = https.createServer(app);
 const io = require('socket.io')(server, {
     cors: {
-        origin: "*",
+        origin: "https://moveo-task-client-one.vercel.app",
         methods: ["GET", "POST"],
     },
 });
-
 
 const PORT = process.env.PORT || 4000;
 

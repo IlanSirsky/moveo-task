@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 
 // Connect to the server
 // const socket = io('http://localhost:4000');
-const socket = io('https://moveo-task-virid.vercel.app', {
+const socket = io('https://moveo-task-server-ruby.vercel.app/', {
   reconnection: true,
   reconnectionAttempts: 3,
 });
@@ -17,7 +17,6 @@ const Lobby = () => {
   // Get code block titles from the server
   useEffect(() => {
     const returnStatus = socket.emit('getTitles');
-    console.log('Socket info', socket);
     console.log('Fetching code block titles', returnStatus);
     socket.on('titles', (titles) => {
       setTitles(titles);
@@ -28,12 +27,11 @@ const Lobby = () => {
     <div>
       <h2>Choose Code Block</h2>
       <ul>
-        {/* {titles.map(block => (
+        {titles.map(block => (
           <li key={block.id}>
             <Link to={`/code/${block.id}`}>{block.title}</Link>
           </li>
-        ))} */}
-        <div>{titles} </div>
+        ))}
       </ul>
     </div>
   );
