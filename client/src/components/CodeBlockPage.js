@@ -23,7 +23,11 @@ const CodeBlockPage = () => {
 
         // Connect to the server
         // socketRef.current = io('http://localhost:4000');
-        socketRef.current = io('https://moveo-task-virid.vercel.app');
+        socketRef.current = io('https://moveo-task-virid.vercel.app', { 
+            transports: ['websocket'],
+            path: '/socket.io',
+            reconnectionAttempts: 3,
+        });
 
         
         // client joined the code block room
