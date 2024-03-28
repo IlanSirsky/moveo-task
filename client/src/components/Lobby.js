@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 
 // Connect to the server
 // const socket = io('http://localhost:4000');
-const socket = io('moveo-task-server-alpha.vercel.app');
+const socket = io('https://moveo-task-virid.vercel.app/');
 
 
 // Lobby component
