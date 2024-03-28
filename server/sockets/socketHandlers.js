@@ -10,9 +10,9 @@ const handleConnection = (socket, io) => {
     socket.on('getTitles', async () => {
         try {
             console.log('Fetching code block titles');
-            const codeBlocks = await Block.find({}, 'blockId title');
-            const titles = codeBlocks.map(block => ({ id: block.blockId, title: block.title }));
-            socket.emit('titles', titles);
+            // const codeBlocks = await Block.find({}, 'blockId title');
+            // const titles = codeBlocks.map(block => ({ id: block.blockId, title: block.title }));
+            socket.emit('titles', "titles");
             console.log('Fetched code block titles');
         } catch (error) {
             console.error('Error fetching code block titles:', error);

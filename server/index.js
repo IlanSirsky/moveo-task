@@ -7,12 +7,10 @@ const socketHandlers = require('./sockets/socketHandlers');
 const app = express();
 const server = http.createServer(app);
 const io = require('socket.io')(server, {
-    wssEngine: ['ws', 'wss'],
     cors: {
         origin: "*",
         methods: ["GET", "POST"],
     },
-    allowEIO3: true
 });
 
 
