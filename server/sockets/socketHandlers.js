@@ -9,6 +9,7 @@ const handleConnection = (socket, io) => {
     // Get code block titles from the database and send to lobby
     socket.on('getTitles', async () => {
         try {
+            console.log('Fetching code block titles');
             const codeBlocks = await Block.find({}, 'blockId title');
             const titles = codeBlocks.map(block => ({ id: block.blockId, title: block.title }));
             socket.emit('titles', titles);

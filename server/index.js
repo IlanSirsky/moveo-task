@@ -10,14 +10,16 @@ const server = http.createServer(app);
 const io = require('socket.io')(server, {
     cors: {
         // origin: "http://localhost:3000",
-        origin: "https://moveo-task-client-one.vercel.app",
-        methods: ["GET", "POST"]
+        origin: ["https://moveo-task-client-one.vercel.app"],
+        methods: ["GET", "POST"],
+        credentials: true
     }
 });
 
 app.use(cors({
-    origin: 'https://moveo-task-client-one.vercel.app',
-    methods: ["GET", "POST"]
+    origin: ["https://moveo-task-client-one.vercel.app"],
+    methods: ["GET", "POST"],
+    credentials: true
 }));
 
 const PORT = process.env.PORT || 4000;
