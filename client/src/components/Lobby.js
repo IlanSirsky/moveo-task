@@ -5,7 +5,7 @@ import io from 'socket.io-client';
 
 // Connect to the server
 // const socket = io('http://localhost:4000');
-const socket = io('https://moveo-task-server-ruby.vercel.app/', {
+const socket = io('https://moveo-task-server-ruby.vercel.app', {
   reconnection: true,
   reconnectionAttempts: 3,
 });
