@@ -12,6 +12,7 @@ const handleConnection = (socket, io) => {
             const codeBlocks = await Block.find({}, 'blockId title');
             const titles = codeBlocks.map(block => ({ id: block.blockId, title: block.title }));
             socket.emit('titles', titles);
+            console.log('Fetched code block titles');
         } catch (error) {
             console.error('Error fetching code block titles:', error);
         }
@@ -36,6 +37,7 @@ const handleConnection = (socket, io) => {
             const codeBlock = await Block.findOne({ blockId: id });
             if (codeBlock) {
                 socket.emit('loadCode', { title: codeBlock.title, code: codeBlock.code, solution: codeBlock.solution});
+                console.log('Loaded code block data');
             } else {
                 console.log('Code block not found');
             }

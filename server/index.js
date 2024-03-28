@@ -15,13 +15,17 @@ const io = require('socket.io')(server, {
     }
 });
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://moveo-task-client-one.vercel.app',
+    methods: ["GET", "POST"]
+}));
 
 const PORT = process.env.PORT || 4000;
 
 // Connect to MongoDB
-// mongoose.connect('mongodb://localhost:27017/codeBlocks', {
-mongoose.connect('mongodb+srv://BigData:BigDataProject23@codeblocks.himeihq.mongodb.net/codeBlocks', {
+// const mongoURI = 'mongodb://localhost:27017/codeBlocks';
+const mongoURI = 'mongodb+srv://BigData:BigDataProject23@codeblocks.himeihq.mongodb.net/codeBlocks';
+mongoose.connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
