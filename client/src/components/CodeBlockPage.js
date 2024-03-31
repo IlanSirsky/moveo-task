@@ -22,13 +22,11 @@ const CodeBlockPage = () => {
     useEffect(() => {
 
         // Connect to the server
-        // socketRef.current = io('http://localhost:4000');
-        socketRef.current = io('https://moveo-task-server-ruby.vercel.app', {
-            cert: process.env.NODE_ENV === 'production' ? process.env.SSL_CERT : '',
-            key: process.env.NODE_ENV === 'production' ? process.env.SSL_KEY : '',
-            reconnection: true,
-            reconnectionAttempts: 5,
-        });
+        socketRef.current = io('http://localhost:4000');
+        // socketRef.current = io('https://moveo-task-server-ruby.vercel.app', {
+        //     reconnection: true,
+        //     reconnectionAttempts: 5,
+        // });
 
         
         // client joined the code block room

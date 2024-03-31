@@ -1,14 +1,15 @@
 const express = require('express');
-const https = require('https');
+const http = require('http');
 const mongoose = require('mongoose');
+require('dotenv').config();
 const socketHandlers = require('./sockets/socketHandlers');
 
 // Create the server
 const app = express();
-const server = https.createServer(app);
+const server = http.createServer(app);
 const io = require('socket.io')(server, {
     cors: {
-        origin: "https://moveo-task-client-one.vercel.app",
+        origin: ["https://moveo-task-client-one.vercel.app", "http://localhost:3000"],
         methods: ["GET", "POST"],
     },
 });
@@ -17,7 +18,7 @@ const PORT = process.env.PORT || 4000;
 
 // Connect to MongoDB
 // const mongoURI = 'mongodb://localhost:27017/codeBlocks';
-const mongoURI = 'mongodb+srv://BigData:BigDataProject23@codeblocks.himeihq.mongodb.net/codeBlocks';
+const mongoURI = process.env.MONGODB_URI || '';
 mongoose.connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -38,5 +39,3 @@ io.on('connection', (socket) => {
 
 // Start the server
 server.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
-
-module.exports = server;
